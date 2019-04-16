@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block content %}
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <a href="#">项目</a>
+    </li>
+    <li class="breadcrumb-item active">项目列表</li>
+</ol>
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <p>
+
+                    <a href="{% url "project_create" %}">新建项目</a>
+                </p>
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="table">
+                    <table class="table  table-sm   table-hover" id="dataTables-example">
+                        <thead>
+                            <tr>
+                                <th>项目名称</th>
+                                <th>描述</th>
+                                <th>创建时间</th>
+                                <th>最近修改时间</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for object in object_list %}
+                            <tr>
+                                <td>{{object.name}}</td>
+                                <td>{{object.description}}</td>
+                                <td>{{object.LastUpdateTime}}</td>
+                                <td>{{object.createTime }}</td>
+
+                                <td>
+                                    <a class="playitbtn tryitbtnsyntax" href={% url "project_detail" object.id %}> 详情</a>
+                                    <a class="playitbtn tryitbtnsyntax" href={% url "project_edit" object.id %}>编辑</a>
+{#                                    <a class="playitbtn tryitbtnsyntax" href=#>删除</a>#}
+                                    <a class="playitbtn tryitbtnsyntax" href={% url "project_delete" object.id %}>删除</a>
+{#                                    <a class="playitbtn tryitbtnsyntax" onclick="deleteUser({{ object.id}})" %}>删除</a>#}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.table-responsive -->
+                {% if is_paginated %}
+                <div class="pagination">
+                    <span class="page-links">
+                        {% if page_obj.has_previous %}
+                        <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">前一页</a>
+                        {% endif %}
+                        <span class="page-current">
+                             {{ page_obj.number }} of  {{ page_obj.paginator.num_pages }}.
+                        </span>
+                        {% if page_obj.has_next %}
+                        <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">下一页</a>
+                        {% endif %}
+                    </span>
+                </div>
+                {% endif %}
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+
+<!-- /.container-fluid -->
+
+{% endblock %}

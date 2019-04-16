@@ -1,0 +1,67 @@
+{% extends "project/project_base.html" %}
+{% block project %}
+<p></p>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+
+
+            <div class="panel-heading">
+                    <p>
+                        <a href="{% url "interface_create"  project.id %}">新建接口</a>
+                    </p>
+                </div>
+            <div class="panel-body">
+                <div class="table">
+                    <table class="table  table-sm   table-hover" id="dataTables-example">
+                        <thead>
+                            <tr>
+                                <th>接口名称</th>
+                                <th>接口url</th>
+                                <th>请求方式</th>
+                                <th>更新时间</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for object in objects %}
+                            <tr>
+                                <td>{{object.name}}</td>
+                                <td>{{object.apiurl}}</td>
+                                <td>{{object.requestType}}</td>
+                                <td>{{object.lastUpdateTime }}</td>
+                                <td>
+                                    <a class="playitbtn tryitbtnsyntax" href=#>编辑</a>
+                                    <a class="playitbtn tryitbtnsyntax" href=#>运行</a>
+                                    <a class="playitbtn tryitbtnsyntax" href=#>结果</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <div class="pagination">
+                            <span class="step-links">
+                                {% if objects.has_previous %}
+                                   
+                                    <a href="?page={{ object.previous_page_number }}">上一页</a>
+                                {% endif %}
+                        
+                                <span class="current">
+                                    Page {{ objects.number }} of {{ objects.paginator.num_pages }}.
+                                </span>
+                        
+                                {% if objects.has_next %}
+                                    <a href="?page={{ objects.next_page_number }}">下一页</a>
+                                    
+                                {% endif %}
+                            </span>
+                        </div>
+                </div>
+                <!-- /.table-responsive -->
+            </div>
+            <!-- /.panel -->
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+
+{% endblock %}

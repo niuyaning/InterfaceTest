@@ -1,0 +1,147 @@
+{% extends "project/project_base.html" %} {% block project %}
+<p></p>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+
+{#            <ol class="breadcrumb">#}
+{#                <li class="breadcrumb-item">#}
+{#                    <a href="#">api接口</a>#}
+{#                </li>#}
+{#                {% if object %}#}
+{#                <li class="breadcrumb-item active">接口编辑</li>#}
+{#                {% else %}#}
+{#                <li class="breadcrumb-item active">新建接口</li>#}
+{#                {% endif %}#}
+{#            </ol>#}
+            <div class="panel-body">
+                <div class="col-lg-6">
+                    <form method="post">
+                        {% csrf_token %} 
+
+                        <div class="form-group">
+                            <label for="httpapi_name">接口名称</label>
+                            {% if object %}
+                            <input class="form-control" name="httpapi_name" id="httpapi_name" required="required" value={{ object.name }}>
+                            {% else %}
+                            <input class="form-control" name="httpapi_name" id="httpapi_name" required="required">
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            
+                            <label for="httpapi_description">接口描述</label>
+                            {% if object %}
+                            <input class="form-control" name="httpapi_description" id="httpapi_description" required="required" value={{ object.description }}>
+                            {% else %}
+                            <input class="form-control" name="httpapi_description" id="httpapi_description" required="required">
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            <label for="httpapi_url">接口url</label>
+                            {% if object %}
+                            <input class="form-control" name="httpapi_url" id="httpapi_url" required="required" value={{ object.apiurl }}>
+                            {% else %}
+                            <input class="form-control" name="httpapi_url" id="httpapi_url" required="required">
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="httpapi_requesttype">请求方法</label>
+    
+                            <select class="form-control" name="httpapi_requesttype" id="httpapi_requesttype">
+                                <option>GET</option>
+                                <option>POST</option>
+                                <option>PUT</option>
+                                <option>DELETE</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="httpapi_requestheader">请求Header</label>
+                            {% if object %}
+                            <textarea class="form-control" name="httpapi_requestheader" id="httpapi_requestheader" rows="5">{{ object.requestHeader }}</textarea>
+                            {% else %}
+                            <textarea class="form-control" name="httpapi_requestheader" id="httpapi_requestheader" rows="5"></textarea>
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            <legend class="col-form-label">请求参数类型</legend>
+
+                            <div class="form-check  form-check-inline">
+                                <input class="form-check-input" type="radio" name="httpapi_requestparametertype" id="httpapi_form-data" value="form-data">
+                                <label class="form-check-label" for="httpapi_form">
+                                    表单(form-data)
+                                </label>
+                            </div>
+                            <div class="form-check  form-check-inline">
+                                <input class="form-check-input" type="radio" name="httpapi_requestparametertype" id="httpapi_raw" value="raw">
+                                <label class="form-check-label" for="httpapi_raw">
+                                    原数据(raw)
+                                </label>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            
+                            <label for="httpapi_requestbody">请求数据</label>
+                            {% if object %}
+                            <textarea class="form-control" name="httpapi_requestbody" id="httpapi_requestbody" rows="5">{{ object.requestBody }}</textarea>
+                            {% else %}
+                            <textarea class="form-control" name="httpapi_requestbody" id="httpapi_requestbody" rows="5"></textarea>
+                            {% endif %}
+                        </div>
+
+{#                        <div class="form-group">#}
+{#                            <label for="httpapi_asserttype">断言类型</label>#}
+{#    #}
+{#                            <select class="form-control" name="httpapi_asserttype" id="httpapi_asserttype">#}
+{#                                <option vaule="noselect">无</option>#}
+{#                                <option value="in">包含</option>#}
+{#                                <option value="status_code">状态码</option>#}
+{#                            </select>#}
+{#                        </div>#}
+{#                        <div class="form-group">#}
+{#                            #}
+{#                            <label for="httpapi_assertcontent">断言内容</label>#}
+{#                            {% if object %}#}
+{#                            <textarea class="form-control" name="httpapi_assertcontent" id="httpapi_assertcontent" rows="5">{{ object.assertContent }}</textarea>#}
+{#                            {% else %}#}
+{#                            <textarea class="form-control" name="httpapi_assertcontent" id="httpapi_assertcontent" rows="5"></textarea>#}
+{#                            {% endif %}#}
+{#                        </div>#}
+
+                        <button type="submit" class="btn btn-default">提交</button>
+                    </form>
+                </div>
+                <!-- /.col-lg-6 -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+{% if object %}
+<script>
+    
+    var e = document.getElementById("httpapi_requesttype")
+    var optionsText="{{ object.requestType }}"
+    for(var i=0;i<e.options.length;i++){
+        if(e.options[i].text==optionsText){
+            e.options[i].selected=true;
+        }
+    }
+
+    var e2 = document.getElementById("httpapi_asserttype")
+    var optionsValue="{{ object.assertType }}"
+    for(var i=0;i<e2.options.length;i++){
+        if(e2.options[i].value==optionsValue){
+            e2.options[i].selected=true;
+        }
+    }
+    var eid = "httpapi_" + "{{ object.requestParameterType }}"
+    var e2 = document.getElementById(eid)
+    e2.setAttribute("checked","checked")
+ 
+</script>
+{% endif %}
+{% endblock %}
