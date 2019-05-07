@@ -73,67 +73,15 @@ class HttpApi(models.Model):
     userUpdate=models.ForeignKey(User,on_delete=models.SET_NULL,null=True,verbose_name="更新人")
     #描述
     description=models.CharField(max_length=1024,blank=True,null=True,verbose_name="描述")
-
+    #断言类型
+    assertType=models.CharField(max_length=200,verbose_name="断言类型",default="",choices=ASSERT_TYPE)
+    #断言内容
+    assertContent=models.CharField(max_length=200,verbose_name="断言内容",default="")
 
     def __str__(self):
         return self.name
 
-# '''
-# 请求方式
-# '''
-# REQUEST_TYPE_CHOICE=(
-#     ('POST','POST'),
-#     ('GET','GET'),
-#     ('PUT','PUT'),
-#     ('DELETE','DELETE')
-# )
-# '''
-# 请求参数格式
-# '''
-# REQUEST_PARAMETER_TYPE_CHOICE=(
-#     ('form-data','表单(form-data)'),
-#     ('raw','原数据(raw)')
-# )
-# '''
-# 断言类型
-# '''
-# ASSERT_TYPE=(
-#     ('noselect','无'),
-#     ('in','包含'),
-#     ('status_code','状态码')
-# )
-#
-# class HttpApi(models.Model):
-#     '''
-#     接口信息
-#     '''
-#     #所属项目
-#     project=models.ForeignKey(Project,on_delete=models.CASCADE,verbose_name='所属项目')
-#     #接口名称
-#     name=models.CharField(max_length=50,verbose_name="接口名称")
-#     #请求方法
-#     requestType=models.CharField(max_length=50,verbose_name="请求方式",choices=REQUEST_TYPE_CHOICE)
-#     #接口地址
-#     apiurl=models.CharField(max_length=1024,verbose_name="接口地址")
-#     #请求参数格式
-#     requestParameterType=models.CharField(max_length=50,verbose_name="请求参数格式",blank=True,null=True,choices=REQUEST_PARAMETER_TYPE_CHOICE)
-#     #请求header
-#     requestHeader=models.TextField(max_length=2048,verbose_name="请求header",blank=True,null=True)
-#     #请求体
-#     requestBody=models.TextField(max_length=2048,verbose_name="请求体",blank=True,null=True)
-#     #最近更新
-#     lastUpdateTime=models.DateTimeField(auto_now=True,verbose_name='最近更新')
-#     #更新人
-#     userUpdate=models.ForeignKey(User,on_delete=models.SET_NULL,null=True,verbose_name='更新人')
-#     #描述
-#     description=models.CharField(max_length=1024,blank=True,null=True,verbose_name='描述')
-#     #断言类型
-#     httpapi_asserttype=models.CharField(max_length=50,verbose_name="断言类型",blank=True,null=True,choices=ASSERT_TYPE)
-#     #断言内容
-#     httpapi_assertcontent=models.TextField(max_length=2048,verbose_name='断言内容',blank=True,null=True)
-#
-#     def __str__(self):
-#         return self.name
+
 
 
 

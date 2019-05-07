@@ -28,7 +28,6 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
-# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -38,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'myapp.apps.MyappConfig',
-    # 'InterfaceTest',
+
 ]
 
 MIDDLEWARE = [
@@ -117,9 +116,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
-
-
 
 STATIC_URL = '/static/'
 #全局指定静态文件位置

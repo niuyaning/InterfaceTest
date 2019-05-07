@@ -1,20 +1,8 @@
 {% extends "base.html" %}
 {% block content %} 
 <nav class="navbar navbar-expand  bg-light text-white static-top">
-    <ul class="nav">
-        <li class="nav-item">
-         <a class="nav-link active" href="#">项目概况</a>
-        </li>
-        <li class="nav-item">
-        <a class="nav-link" href="{% url "interface_list" project.id %}">api接口</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">测试报告</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#"></a>
-        </li>
-      </ul>
+     <h5><a href="#">项目概况/</a><a href="{% url 'interface_list' project.id %}">api接口/</a><a href="#">测试报告</a></h5>
+
 </nav>
 {% block project %}
 

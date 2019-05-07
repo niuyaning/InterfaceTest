@@ -28,8 +28,8 @@ def user_login(request):
            login(request,user)
            return redirect("project_list")
         else:
-            msg="用户名或密码错误"
-            return render(request,"login.html",{"msg":msg})
+           msg="用户名或密码错误"
+           return render(request,"login.html",{"msg":msg})
 '''
 退出
 '''
@@ -53,6 +53,7 @@ def project_create(request):
         return render(request,"project/project_create.html")
     if request.method=="POST":
         project_name=request.POST.get("project_name")
+        #strip 去除首尾空格
         project_description=request.POST.get("project_description").strip()
         project_owner_str=request.POST.get("project_owner").strip()
         try:
@@ -126,14 +127,13 @@ class ProjectDetailView(LoginRequiredMixin,generic.DetailView):
 '''
 删除项目
 '''
-
 @csrf_exempt
 def project_delete(request,pk):
     if request.method == "GET":
         project = Project.objects.get(id=pk)
         print(project.id)
         return render(request, "project/project_delete.html", {"project": project})
-    if request.method=="POST":
+    if request.method == "POST":
         project = Project.objects.get(id=pk)
         project.delete()
         return HttpResponse("删除数据成功")
@@ -155,7 +155,7 @@ def interface_list(request,pk):
 '''
 新建接口
 '''
-@login_required
+@login_required  #跳过登录
 def interface_create(request,pk):
     if request.method=="GET":
         project=Project.objects.get(id=pk)
@@ -169,6 +169,8 @@ def interface_create(request,pk):
         httpapi_requestheader=request.POST.get("httpapi_requestheader")
         httpapi_requestparametertype=request.POST.get("httpapi_requestparametertype")
         httpapi_requestbody=request.POST.get("httpapi_requestbody")
+        httpapi_asserttype=request.POST.get("httpapi_asserttype")
+        httpapi_assertcontent=request.POST.get("httpapi_assertcontent")
         userupdate=request.user
         httpapi=HttpApi(
             project=httpapi_project,
@@ -180,10 +182,38 @@ def interface_create(request,pk):
             requestBody=httpapi_requestbody,
             userUpdate=userupdate,
             description=httpapi_description,
-
+            assertType=httpapi_asserttype,
+            assertContent=httpapi_assertcontent,
         )
         httpapi.save()
         return redirect("interface_list",httpapi_project.id)
+'''
+接口编辑
+'''
+@login_required
+def interface_edit(request,project_id,httpapi_id):
+    if request.method=="GET":
+        project=Project.objects.get(id=project_id)
+        httpapi=HttpApi.objects.get(project=project,id=httpapi_id)
+        return render(request,"project/interface_create.html",{"project":project,"object":httpapi})
+    if request.method=="POST":
+        project=Project.objects.get(id=project_id)
+        httpapi=HttpApi.objects.get(project=project,id=httpapi_id)
+        httpapi.name=request.POST.get("httpapi_name")
+        httpapi.description=request.POST.get("httpapi_description")
+        httpapi.httpapi_url=request.POST.get("httpapi_url")
+        httpapi.httpapi_requesttype=request.POST.get("httpapi_requesttype")
+        httpapi.httpapi_requestheader=request.POST.get("httpapi_requestheader")
+        httpapi.httpapi_requestparametertype=request.POST.get("httpapi_requestparametertype")
+        httpapi.httpapi_requestbody=request.POST.get("httpapi_requestbody")
+        httpapi.httpapi_asserttype=request.POST.get("httpapi_asserttype")
+        httpapi.httpapi_assertcontent=request.POST.get("httpapi_assertcontent")
+        httpapi.userUpdate=request.user
+        httpapi.save()
+        return redirect("interface_list",project.id)
+
+
+
 
 
 

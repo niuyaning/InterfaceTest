@@ -8,7 +8,7 @@
 
             <div class="panel-heading">
                     <p>
-                        <a href="{% url "interface_create"  project.id %}">新建接口</a>
+                        <a href="{% url 'interface_create' project.id %}">新建接口</a>
                     </p>
                 </div>
             <div class="panel-body">
@@ -31,7 +31,7 @@
                                 <td>{{object.requestType}}</td>
                                 <td>{{object.lastUpdateTime }}</td>
                                 <td>
-                                    <a class="playitbtn tryitbtnsyntax" href=#>编辑</a>
+                                    <a class="playitbtn tryitbtnsyntax" href={% url "interface_edit" project.id object.id%}>编辑</a>
                                     <a class="playitbtn tryitbtnsyntax" href=#>运行</a>
                                     <a class="playitbtn tryitbtnsyntax" href=#>结果</a>
                                 </td>

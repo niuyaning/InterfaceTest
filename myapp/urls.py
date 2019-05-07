@@ -16,11 +16,12 @@ urlpatterns=[
     #编辑项目
     path('project/<int:pk>/edit',views.project_edit,name='project_edit'),
     #删除项目
-    # path('project/<int:project_id>/delete',views.project_delete,name='project_delete'),
     path('project/<int:pk>/delete',views.project_delete,name='project_delete'),
     #接口列表
     path('project/<int:pk>/interface/list',views.interface_list,name='interface_list'),
     #新建接口
-    path('project/<int:pk>/interface/create',views.interface_create,name='interface_create')
+    path('project/<int:pk>/interface/create',views.interface_create,name='interface_create'),
+    #编辑接口
+    path('project/<int:project_id>/httpapi/<int:httpapi_id>/edit',views.interface_edit,name="interface_edit")
  ]
 

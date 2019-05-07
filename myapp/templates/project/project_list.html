@@ -6,14 +6,11 @@
     </li>
     <li class="breadcrumb-item active">项目列表</li>
 </ol>
-
-
 <div class="row">
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <p>
-
                     <a href="{% url "project_create" %}">新建项目</a>
                 </p>
             </div>
@@ -37,13 +34,10 @@
                                 <td>{{object.description}}</td>
                                 <td>{{object.LastUpdateTime}}</td>
                                 <td>{{object.createTime }}</td>
-
                                 <td>
                                     <a class="playitbtn tryitbtnsyntax" href={% url "project_detail" object.id %}> 详情</a>
                                     <a class="playitbtn tryitbtnsyntax" href={% url "project_edit" object.id %}>编辑</a>
-{#                                    <a class="playitbtn tryitbtnsyntax" href=#>删除</a>#}
                                     <a class="playitbtn tryitbtnsyntax" href={% url "project_delete" object.id %}>删除</a>
-{#                                    <a class="playitbtn tryitbtnsyntax" onclick="deleteUser({{ object.id}})" %}>删除</a>#}
                                 </td>
                             </tr>
                             {% endfor %}
