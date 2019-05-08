@@ -71,13 +71,20 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'InterfaceTest.wsgi.application'
 
-
-
-
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'InterfaceModels',
+#         'USER': 'bz_user',
+#         'PASSWORD': '3fff0bdfa72e22ab',
+#         'HOST': '118.31.189.117',
+#         'PORT': '2333',
+#     }
+# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'mymodels',
+        'NAME': 'interfacemodels',
         'USER': 'root',
         'PASSWORD': '123456',
         'HOST': '127.0.0.1',
