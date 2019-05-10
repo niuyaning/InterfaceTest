@@ -1,0 +1,32 @@
+{% extends "project/project_base.html" %}
+{% block project %}
+
+{% if error_msg %}
+      <p>{{error_msg}}</p>
+{% endif %}
+<div class="panel-body">
+                <div class="table">
+                    <table class="table  table-sm   table-hover" id="dataTables-example">
+                        <thead>
+                            <tr>
+                                <th>项目名称</th>
+                                <th>描述</th>
+                                <th>创建时间</th>
+                                <th>最近修改时间</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for object in object_list %}
+                            <tr>
+                                <td>{{object.name}}</td>
+                                <td>{{object.description}}</td>
+                                <td>{{object.LastUpdateTime}}</td>
+                                <td>{{object.createTime }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+{% endblock %}

@@ -138,7 +138,19 @@ def project_delete(request,pk):
         project.delete()
         return HttpResponse("删除数据成功")
         return redirect("project_list",project.id)
-
+'''
+项目搜索
+'''
+def project_search(request):
+    q=request.GET.get('q')
+    print(q)
+    errmsg = ''
+    if q is None:
+        errmsg="请输入项目名称"
+        return render(request,'project/project_search.html',{"errmsg":errmsg})
+    project = Project.objects.filter(name__contains=q)
+    print(project)
+    return render(request,'project/project_search.html',{"project": project, "errmsg": errmsg})
 
 '''
 接口列表

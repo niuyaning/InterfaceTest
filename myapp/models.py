@@ -6,7 +6,6 @@ class Project(models.Model):
     '''
     项目信息
     '''
-
     #项目名称
     name=models.CharField(max_length=50,verbose_name='项目名称')
     #项目描述

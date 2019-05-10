@@ -9,11 +9,17 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="panel panel-default">
-            <div class="panel-heading">
+            <h4 class="panel-heading">
                 <p>
                     <a href="{% url "project_create" %}">新建项目</a>
                 </p>
-            </div>
+                <form role="search" method="get" id="searchform" action={% url "project_search"%}>
+                    {% csrf_token%}
+                <input type="search" name="q" placeholder="请输入项目名称" required></input> <button type="submit" style="margin-left:3%;">搜索</button>
+
+
+                </form>
+        </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
                 <div class="table">
